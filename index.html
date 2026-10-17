@@ -1,64 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="A precision luxury Chronometer and Digital Clock interface built with HTML5, CSS3, and Vanilla JavaScript. Features real-time analog sweeping hands, 12h/24h digital time, date, battery status, and radial numeral dial." />
+  <meta name="description"
+    content="A precision luxury Chronometer and Digital Clock interface built with HTML5, CSS3, and Vanilla JavaScript. Features real-time analog sweeping hands, 12h/24h digital time, date, battery status, and radial numeral dial." />
   <meta name="theme-color" content="#000000" />
   <title>Digital & Analog Chronometer | Precision Real-Time Watch</title>
 
   <!-- Google Fonts: Playfair Display & Cinzel for Luxury Numerals, Inter for Complications -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap"
+    rel="stylesheet" />
 
   <!-- Main Stylesheet -->
   <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
 
   <main class="watch-wrapper" role="main">
-    
-    <!-- Top Live Status & Controls Header -->
-    <header class="watch-header">
-      <div class="live-status" aria-label="Status: Live real-time clock">
-        <span class="live-dot" aria-hidden="true"></span>
-        <span class="live-label">LIVE CHRONOMETER</span>
+    <div class="header-controls">
+      <!-- 12H / 24H Format Toggle -->
+      <div class="format-toggle-group">
+        <span class="toggle-tag" id="tag12">12H</span>
+        <button type="button" id="formatToggle" class="switch-btn" role="switch" aria-checked="false"
+          aria-label="Toggle between 12-hour and 24-hour format" title="Toggle 12H / 24H format">
+          <span class="switch-handle" aria-hidden="true"></span>
+        </button>
+        <span class="toggle-tag" id="tag24">24H</span>
       </div>
-
-      <div class="header-controls">
-        <!-- 12H / 24H Format Toggle -->
-        <div class="format-toggle-group">
-          <span class="toggle-tag" id="tag12">12H</span>
-          <button 
-            type="button" 
-            id="formatToggle" 
-            class="switch-btn" 
-            role="switch" 
-            aria-checked="false" 
-            aria-label="Toggle between 12-hour and 24-hour format"
-            title="Toggle 12H / 24H format">
-            <span class="switch-handle" aria-hidden="true"></span>
-          </button>
-          <span class="toggle-tag" id="tag24">24H</span>
-        </div>
-      </div>
-    </header>
+    </div>
 
     <!-- Watch Face Container -->
     <div class="watch-dial-container" id="watchDialContainer" aria-label="Analog and Digital Clock Face">
-      <svg 
-        id="watchSvg" 
-        class="watch-svg" 
-        viewBox="0 0 500 500" 
-        aria-hidden="true">
-        
+      <svg id="watchSvg" class="watch-svg" viewBox="0 0 500 500" aria-hidden="true">
+
         <!-- Dial Background -->
         <circle class="dial-background" cx="250" cy="250" r="248" />
 
         <!-- Master Center Group (origin at 250, 250) -->
         <g id="dialCenterGroup" transform="translate(250, 250)">
-          
+
           <!-- Dial Ticks Group (60 minute & 12 major hour ticks) -->
           <g id="dialTicks" class="dial-ticks"></g>
 
@@ -82,7 +68,8 @@
 
           <!-- Complication: Bottom Digital Time -->
           <g class="complication-group digital-group">
-            <text id="digitalText" class="complication-text digital-text" x="0" y="115" text-anchor="middle">10:07 PM</text>
+            <text id="digitalText" class="complication-text digital-text" x="0" y="115" text-anchor="middle">10:07
+              PM</text>
           </g>
 
           <!-- Hands Group (Rotated around 0, 0) -->
@@ -114,11 +101,6 @@
     <footer class="watch-meta" role="contentinfo">
       <div class="meta-pills">
         <div class="meta-pill timezone-pill" id="timezonePill">
-          <svg class="globe-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <circle cx="12" cy="12" r="10"></circle>
-            <line x1="2" y1="12" x2="22" y2="12"></line>
-            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
-          </svg>
           <span id="timezoneLabel">UTC</span>
         </div>
 
@@ -127,10 +109,6 @@
           <span id="motionLabel">Smooth Sweep</span>
         </button>
       </div>
-
-      <p class="credit-text">
-        Built with <span class="badge">HTML5</span> <span class="badge">CSS3</span> &amp; <span class="badge">Vanilla JavaScript</span>
-      </p>
     </footer>
 
   </main>
@@ -138,4 +116,5 @@
   <!-- Core JavaScript -->
   <script src="script.js"></script>
 </body>
+
 </html>
