@@ -3,115 +3,139 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="A modern, high-precision Digital Clock built with semantic HTML5, modern CSS3, and Vanilla JavaScript. Features real-time precision, 12h/24h toggle, responsive glassmorphism UI, and date display." />
-  <meta name="theme-color" content="#0a0d14" />
-  <title>Digital Clock | Modern Real-Time Precision Clock</title>
-  
-  <!-- Preconnect to Google Fonts -->
+  <meta name="description" content="A precision luxury Chronometer and Digital Clock interface built with HTML5, CSS3, and Vanilla JavaScript. Features real-time analog sweeping hands, 12h/24h digital time, date, battery status, and radial numeral dial." />
+  <meta name="theme-color" content="#000000" />
+  <title>Digital & Analog Chronometer | Precision Real-Time Watch</title>
+
+  <!-- Google Fonts: Playfair Display & Cinzel for Luxury Numerals, Inter for Complications -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-  
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet" />
+
   <!-- Main Stylesheet -->
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <!-- Ambient background lighting effects -->
-  <div class="ambient-glow ambient-glow-1" aria-hidden="true"></div>
-  <div class="ambient-glow ambient-glow-2" aria-hidden="true"></div>
 
-  <main class="clock-app" role="main">
-    <div class="clock-card" id="clockCard">
-      
-      <!-- Top Bar: Live Status & Format Toggle -->
-      <header class="card-header">
-        <div class="status-indicator" id="statusIndicator" aria-label="Status: Live real-time clock">
-          <span class="status-dot" aria-hidden="true"></span>
-          <span class="status-text">LIVE CLOCK</span>
-        </div>
+  <main class="watch-wrapper" role="main">
+    
+    <!-- Top Live Status & Controls Header -->
+    <header class="watch-header">
+      <div class="live-status" aria-label="Status: Live real-time clock">
+        <span class="live-dot" aria-hidden="true"></span>
+        <span class="live-label">LIVE CHRONOMETER</span>
+      </div>
 
-        <div class="toggle-container">
-          <label class="toggle-label" for="formatToggle" id="toggleLabel">
-            <span class="format-tag tag-12">12H</span>
-            <span class="format-tag tag-24">24H</span>
-          </label>
+      <div class="header-controls">
+        <!-- 12H / 24H Format Toggle -->
+        <div class="format-toggle-group">
+          <span class="toggle-tag" id="tag12">12H</span>
           <button 
             type="button" 
             id="formatToggle" 
-            class="toggle-switch" 
+            class="switch-btn" 
             role="switch" 
             aria-checked="false" 
-            aria-labelledby="toggleLabel"
-            title="Toggle between 12-hour and 24-hour format">
-            <span class="toggle-slider" aria-hidden="true"></span>
+            aria-label="Toggle between 12-hour and 24-hour format"
+            title="Toggle 12H / 24H format">
+            <span class="switch-handle" aria-hidden="true"></span>
           </button>
+          <span class="toggle-tag" id="tag24">24H</span>
         </div>
-      </header>
+      </div>
+    </header>
 
-      <!-- Main Time Display Area -->
-      <section class="time-section" aria-label="Current Time">
-        <time id="timeDisplay" class="time-display" role="timer" aria-live="polite">
-          <div class="time-unit hours-group">
-            <span class="time-digits" id="hours">00</span>
-            <span class="unit-label">HOURS</span>
-          </div>
-
-          <span class="time-separator" aria-hidden="true">:</span>
-
-          <div class="time-unit minutes-group">
-            <span class="time-digits" id="minutes">00</span>
-            <span class="unit-label">MINUTES</span>
-          </div>
-
-          <span class="time-separator" aria-hidden="true">:</span>
-
-          <div class="time-unit seconds-group">
-            <span class="time-digits" id="seconds">00</span>
-            <span class="unit-label">SECONDS</span>
-          </div>
-
-          <!-- AM/PM Indicator Badge -->
-          <div class="period-badge-wrapper" id="periodWrapper">
-            <span class="period-badge" id="periodBadge" aria-label="Time period">AM</span>
-          </div>
-        </time>
-      </section>
-
-      <!-- Calendar & Date Display -->
-      <section class="date-section" aria-label="Current Date">
-        <div class="date-chip">
-          <svg class="calendar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-            <line x1="16" y1="2" x2="16" y2="6"></line>
-            <line x1="8" y1="2" x2="8" y2="6"></line>
-            <line x1="3" y1="10" x2="21" y2="10"></line>
-          </svg>
-          <span class="day-name" id="dayName">Saturday</span>
-          <span class="date-separator" aria-hidden="true">•</span>
-          <span class="full-date" id="fullDate">October 17, 2026</span>
-        </div>
+    <!-- Watch Face Container -->
+    <div class="watch-dial-container" id="watchDialContainer" aria-label="Analog and Digital Clock Face">
+      <svg 
+        id="watchSvg" 
+        class="watch-svg" 
+        viewBox="0 0 500 500" 
+        aria-hidden="true">
         
-        <div class="timezone-chip" id="timezoneChip">
+        <!-- Dial Background -->
+        <circle class="dial-background" cx="250" cy="250" r="248" />
+
+        <!-- Master Center Group (origin at 250, 250) -->
+        <g id="dialCenterGroup" transform="translate(250, 250)">
+          
+          <!-- Dial Ticks Group (60 minute & 12 major hour ticks) -->
+          <g id="dialTicks" class="dial-ticks"></g>
+
+          <!-- Hour Numbers 1 to 12 (Radially Rotated) -->
+          <g id="dialNumbers" class="dial-numbers"></g>
+
+          <!-- Complication: Top Battery Indicator -->
+          <g class="complication-group battery-group">
+            <text id="batteryText" class="complication-text battery-text" x="0" y="-95" text-anchor="middle">83%</text>
+          </g>
+
+          <!-- Complication: Left Day of Week -->
+          <g class="complication-group day-group">
+            <text id="dayText" class="complication-text day-text" x="-110" y="6" text-anchor="middle">SAT</text>
+          </g>
+
+          <!-- Complication: Right Day & Month -->
+          <g class="complication-group date-group">
+            <text id="dateText" class="complication-text date-text" x="110" y="6" text-anchor="middle">23 MAR</text>
+          </g>
+
+          <!-- Complication: Bottom Digital Time -->
+          <g class="complication-group digital-group">
+            <text id="digitalText" class="complication-text digital-text" x="0" y="115" text-anchor="middle">10:07 PM</text>
+          </g>
+
+          <!-- Hands Group (Rotated around 0, 0) -->
+          <!-- Hour Hand (Cream stem with bright red sleeve near pivot) -->
+          <g id="hourHandGroup" class="hand-group">
+            <line class="hour-hand-stem" x1="0" y1="0" x2="0" y2="-115" />
+            <line class="hour-hand-accent" x1="0" y1="0" x2="0" y2="-28" />
+          </g>
+
+          <!-- Minute Hand (Cream stem reaching towards outer track) -->
+          <g id="minuteHandGroup" class="hand-group">
+            <line class="minute-hand-stem" x1="0" y1="0" x2="0" y2="-170" />
+          </g>
+
+          <!-- Second Hand (Vibrant Red Needle with Counter-Balance Tail) -->
+          <g id="secondHandGroup" class="hand-group second-hand-group">
+            <line class="second-hand-stem" x1="0" y1="42" x2="0" y2="-198" />
+          </g>
+
+          <!-- Center Pivot Hub Pin -->
+          <circle class="center-hub-outer" cx="0" cy="0" r="7.5" />
+          <circle class="center-hub-inner" cx="0" cy="0" r="2.2" />
+
+        </g>
+      </svg>
+    </div>
+
+    <!-- Secondary Controls & Meta Information -->
+    <footer class="watch-meta" role="contentinfo">
+      <div class="meta-pills">
+        <div class="meta-pill timezone-pill" id="timezonePill">
           <svg class="globe-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <circle cx="12" cy="12" r="10"></circle>
             <line x1="2" y1="12" x2="22" y2="12"></line>
             <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
           </svg>
-          <span id="timezoneText">UTC</span>
+          <span id="timezoneLabel">UTC</span>
         </div>
-      </section>
 
-    </div>
+        <button type="button" id="sweepToggle" class="meta-pill action-pill" title="Toggle hand motion style">
+          <span class="motion-icon" aria-hidden="true">⏱</span>
+          <span id="motionLabel">Smooth Sweep</span>
+        </button>
+      </div>
 
-    <!-- Application Footer -->
-    <footer class="app-footer" role="contentinfo">
-      <p class="footer-text">
-        Built with <span class="tech-pill">HTML</span> <span class="tech-pill">CSS</span> &amp; <span class="tech-pill">JavaScript</span>
+      <p class="credit-text">
+        Built with <span class="badge">HTML5</span> <span class="badge">CSS3</span> &amp; <span class="badge">Vanilla JavaScript</span>
       </p>
     </footer>
+
   </main>
 
-  <!-- Main JavaScript File -->
+  <!-- Core JavaScript -->
   <script src="script.js"></script>
 </body>
 </html>
