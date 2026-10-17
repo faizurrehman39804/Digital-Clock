@@ -361,8 +361,10 @@ function initClock() {
   // 2. Load stored settings
   loadSavedPreferences();
 
-  // 3. Display timezone
-  elements.timezoneLabel.textContent = getLocalTimezoneDisplay();
+  // 3. Display timezone (if element exists)
+  if (elements.timezoneLabel) {
+    elements.timezoneLabel.textContent = getLocalTimezoneDisplay();
+  }
 
   // 4. Initialize battery API
   initBatteryStatus();

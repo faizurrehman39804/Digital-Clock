@@ -140,7 +140,10 @@ body {
 }
 
 .toggle-tag.active {
-  color: var(--accent-yellow-bright);
+  background: linear-gradient(135deg, #fffde7 0%, #ffd54f 60%, #ff8f00 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 700;
 }
 
 .switch-btn {
@@ -227,10 +230,10 @@ body {
 }
 
 .tick-major {
-  stroke: var(--accent-yellow-bright);
+  stroke: url(#dialGoldGradient);
   stroke-width: 3.4;
   stroke-linecap: round;
-  filter: drop-shadow(0 0 1.5px rgba(255, 235, 0, 0.6));
+  filter: drop-shadow(0 0 2px rgba(255, 213, 79, 0.65));
 }
 
 /* --------------------------------------------------------------------------
@@ -239,11 +242,11 @@ body {
 .dial-number {
   font-family: var(--font-serif);
   font-weight: 700;
-  font-size: 34px;
-  fill: var(--accent-yellow-bright);
+  font-size: 35px;
+  fill: url(#dialGoldGradient);
   text-anchor: middle;
   dominant-baseline: central;
-  filter: drop-shadow(0 0 2px rgba(255, 235, 0, 0.4));
+  filter: drop-shadow(0 0 3px rgba(255, 213, 79, 0.5));
 }
 
 /* --------------------------------------------------------------------------
@@ -251,32 +254,39 @@ body {
    -------------------------------------------------------------------------- */
 .complication-text {
   font-family: var(--font-sans);
-  fill: var(--accent-yellow-cream);
-  letter-spacing: 0.05em;
+  fill: url(#complicationGradient);
+  letter-spacing: 0.08em;
   dominant-baseline: central;
 }
 
 .battery-text {
   font-size: 22px;
-  font-weight: 600;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  filter: drop-shadow(0 0 3px rgba(255, 235, 59, 0.45));
 }
 
 .day-text {
   font-size: 20px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  filter: drop-shadow(0 0 3px rgba(255, 235, 59, 0.45));
 }
 
 .date-text {
   font-size: 20px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  filter: drop-shadow(0 0 3px rgba(255, 235, 59, 0.45));
 }
 
 .digital-text {
-  font-size: 21px;
-  font-weight: 500;
-  letter-spacing: 0.04em;
+  font-family: var(--font-mono);
+  font-size: 23px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  fill: url(#digitalGradient);
+  filter: drop-shadow(0 0 5px rgba(255, 202, 40, 0.65));
 }
 
 /* --------------------------------------------------------------------------
@@ -366,13 +376,17 @@ body {
 .action-pill {
   cursor: pointer;
   font-family: inherit;
-  color: var(--text-white);
+  color: #fff9c4;
+  border-color: rgba(255, 213, 79, 0.28);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
 }
 
 .action-pill:hover {
-  background: var(--pill-hover);
-  border-color: rgba(255, 235, 0, 0.35);
-  color: var(--accent-yellow-bright);
+  background: linear-gradient(180deg, rgba(255, 213, 79, 0.16) 0%, rgba(255, 213, 79, 0.04) 100%);
+  border-color: rgba(255, 213, 79, 0.6);
+  color: #ffffff;
+  box-shadow: 0 0 12px rgba(255, 213, 79, 0.25);
 }
 
 .action-pill:focus-visible {
