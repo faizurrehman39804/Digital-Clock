@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A modern, high-precision Digital Clock built with semantic HTML5, modern CSS3, and Vanilla JavaScript. Features real-time precision, 12h/24h toggle, responsive glassmorphism UI, and date display." />
+  <meta name="theme-color" content="#0a0d14" />
+  <title>Digital Clock | Modern Real-Time Precision Clock</title>
+  
+  <!-- Preconnect to Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Ambient background lighting effects -->
+  <div class="ambient-glow ambient-glow-1" aria-hidden="true"></div>
+  <div class="ambient-glow ambient-glow-2" aria-hidden="true"></div>
+
+  <main class="clock-app" role="main">
+    <div class="clock-card" id="clockCard">
+      
+      <!-- Top Bar: Live Status & Format Toggle -->
+      <header class="card-header">
+        <div class="status-indicator" id="statusIndicator" aria-label="Status: Live real-time clock">
+          <span class="status-dot" aria-hidden="true"></span>
+          <span class="status-text">LIVE CLOCK</span>
+        </div>
+
+        <div class="toggle-container">
+          <label class="toggle-label" for="formatToggle" id="toggleLabel">
+            <span class="format-tag tag-12">12H</span>
+            <span class="format-tag tag-24">24H</span>
+          </label>
+          <button 
+            type="button" 
+            id="formatToggle" 
+            class="toggle-switch" 
+            role="switch" 
+            aria-checked="false" 
+            aria-labelledby="toggleLabel"
+            title="Toggle between 12-hour and 24-hour format">
+            <span class="toggle-slider" aria-hidden="true"></span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Main Time Display Area -->
+      <section class="time-section" aria-label="Current Time">
+        <time id="timeDisplay" class="time-display" role="timer" aria-live="polite">
+          <div class="time-unit hours-group">
+            <span class="time-digits" id="hours">00</span>
+            <span class="unit-label">HOURS</span>
+          </div>
+
+          <span class="time-separator" aria-hidden="true">:</span>
+
+          <div class="time-unit minutes-group">
+            <span class="time-digits" id="minutes">00</span>
+            <span class="unit-label">MINUTES</span>
+          </div>
+
+          <span class="time-separator" aria-hidden="true">:</span>
+
+          <div class="time-unit seconds-group">
+            <span class="time-digits" id="seconds">00</span>
+            <span class="unit-label">SECONDS</span>
+          </div>
+
+          <!-- AM/PM Indicator Badge -->
+          <div class="period-badge-wrapper" id="periodWrapper">
+            <span class="period-badge" id="periodBadge" aria-label="Time period">AM</span>
+          </div>
+        </time>
+      </section>
+
+      <!-- Calendar & Date Display -->
+      <section class="date-section" aria-label="Current Date">
+        <div class="date-chip">
+          <svg class="calendar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="16" y1="2" x2="16" y2="6"></line>
+            <line x1="8" y1="2" x2="8" y2="6"></line>
+            <line x1="3" y1="10" x2="21" y2="10"></line>
+          </svg>
+          <span class="day-name" id="dayName">Saturday</span>
+          <span class="date-separator" aria-hidden="true">•</span>
+          <span class="full-date" id="fullDate">October 17, 2026</span>
+        </div>
+        
+        <div class="timezone-chip" id="timezoneChip">
+          <svg class="globe-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="2" y1="12" x2="22" y2="12"></line>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+          </svg>
+          <span id="timezoneText">UTC</span>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- Application Footer -->
+    <footer class="app-footer" role="contentinfo">
+      <p class="footer-text">
+        Built with <span class="tech-pill">HTML</span> <span class="tech-pill">CSS</span> &amp; <span class="tech-pill">JavaScript</span>
+      </p>
+    </footer>
+  </main>
+
+  <!-- Main JavaScript File -->
+  <script src="script.js"></script>
+</body>
+</html>
